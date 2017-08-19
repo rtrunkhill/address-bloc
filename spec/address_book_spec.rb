@@ -36,4 +36,23 @@
        expect(new_entry.email).to eq('augusta.king@lovelace.com')
      end
    end
+   
+   describe "#remove_entry" do
+     it "removes entire entry from address_book" do
+       book = AddressBook.new
+       book.remove_entry
+       book.add_entry('Christine Le', '555.555.5555', 'christinele@bloc.io')
+       
+       name = 'Ada Lovelace'
+       phone_number = '010.012.1815'
+       email = 'augusta.king@lovelace.com'
+       book.add_entry(name, phone_number, email)
+       
+       expect(book.entries.size).to eq 2
+       book.remove_entry(name, phone_number, email)
+       expect(book.entries.size).to eq 1
+       expect(book.entire.first.name).to eq('Christine Le')
+     end
+    end
+   
  end
