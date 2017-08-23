@@ -13,7 +13,8 @@
      puts "2 - Create an entry"
      puts "3 - Search for an entry"
      puts "4 - Import entries from a CSV"
-     puts "5 - Exit"
+     puts "5 - Delete ALL entries"
+     puts "6 - Exit"
      print "Enter your selection: "
  
      selection = gets.to_i
@@ -36,6 +37,10 @@
          read_csv
          main_menu
        when 5
+         system "clear"
+         destro_entries
+         main_menu
+       when 6
          puts "Good-bye!"
          exit(0)
        else
@@ -105,6 +110,25 @@
      end  
        
    end
+   
+   def destro_entries
+      print "WARNING!! You are about to delete every entry.  Proceed? y/n: "
+      warned = gets.chomp
+      
+      case warned
+        when "y"
+          address_book.entries.clear
+          puts "All entries have been deleted"
+          main_menu
+        when "n"
+          puts "The current entries are safe! Returning to main menu"
+          main_menu
+        else 
+          system "clear"
+          puts "#{warned} is not a valid input"
+          destro_entries
+      end    
+   end    
    
   def entry_submenu(entry)
         puts "n - next entry"
